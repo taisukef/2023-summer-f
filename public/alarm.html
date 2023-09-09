@@ -87,9 +87,17 @@
 <script>
 
   document.getElementById("sleep_button").onclick = async () => {
+    try {
+      const wakeLock = await navigator.wakeLock.request("screen");
+      console.log(wakeLock);
+    } catch (e) {
+      alert("起動ロックができませんでした。アラームが鳴る前にスリープしてしまうかもしれません。" + e.name + " " + e.message);
+    }
+
     const sleep_button = document.getElementById("sleep_button")
     sleep_button.hidden = true;
     const id = localStorage.getItem("user_id");
+    /*
     const response = await fetch("/time_get", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -97,10 +105,15 @@
     }).then((res) => {
       return res.json(); // サーバーサイドからのデータをJSONとして解析
     }).then((data) => {
+      */
+      const data = {
+        wake_up_time: localStorage.getItem("time"),
+      };
+      console.log(data);
       //アラームまでの時間を計算
       let date1 = new Date();
       let date2 = new Date(data.wake_up_time);
-      var diff = date2.getTime() - date1.getTime() - (32400 * 1000);
+      var diff = date2.getTime() - date1.getTime();// - (32400 * 1000);
       console.log(diff / (1000));
 
 
@@ -126,9 +139,11 @@
         });
         sound.play();
       }, diff);
+      /*
     }).catch((e) => {
       console.error(e)
     });
+    */
   }
 
 
@@ -239,7 +254,7 @@
           drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
           qrtxt = code.data
           if (qrtxt === "https://2023-summer-f.deno.dev/sleeper.html") {
-            window.location.href = '/wash_time.html';
+            window.location.href = './wash_time.html';
             // outputMessage.hidden = true;
             // ok.hidden = false;
           }
