@@ -7,3 +7,4 @@ WAAAAAsh!! by jig.jp 2023夏インターン　Fチーム
 ## API
 
 - [Screen Wake Lock API / 画面起動ロック API - Web API | MDN](https://developer.mozilla.org/ja/docs/Web/API/Screen_Wake_Lock_API)
+- [howler.js - JavaScript audio library for the modern web](https://howlerjs.com/)
