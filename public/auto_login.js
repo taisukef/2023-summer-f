@@ -11,6 +11,9 @@ document
   .getElementById("loginForm")
   .addEventListener("submit", async (event) => {
     event.preventDefault();
+    location.href = "./setting.html";
+    return;
+    
 	const did = localStorage.getItem("did");
 	const password = localStorage.getItem("password");
     if (isGuest()) {
